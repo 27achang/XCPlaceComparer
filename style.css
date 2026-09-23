@@ -1,0 +1,56 @@
+body {
+    font-family: Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 16px);
+}
+
+#buttons_div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-grow: 1000;
+}
+
+#buttons_div button {
+    flex: 1 1 100px;
+    font-family: inherit;
+    font-size: 3em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#SHC_runner_button {
+    background-color: #00573D;
+    color: white;
+    margin-right: 5px;
+    border: 2px solid #6BA53A;
+}
+
+#SI_runner_button {
+    background-color: #A71930;
+    color: white;
+    margin-right: 5px;
+    border: 2px solid #002664;
+}
+
+#other_runner_button {
+    border: 2px solid black;
+}
+
+#footer {
+    flex-grow: 0.1;
+    margin-top: 10px;
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#footer div {
+    display: inline;
+}
+
+.label {
+    font-weight: bold;
+}
