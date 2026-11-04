@@ -7,6 +7,7 @@ const runners_past_label = document.getElementById("runners_past_label");
 const runners_past_display = document.getElementById("runners_past_display");
 
 var runners_past = 0;
+var teams = {};
 var SHC_score = 0;
 var SHC_minimum_score = 0;
 var SHC_runners_places = [];
@@ -43,7 +44,27 @@ function onSIRunnerPassing() {
 function onOtherRunnerPassing() {
     runners_past++;
     // Update displays
+    updateMinimumScores();
     updateRunnersPastDisplay();
+}
+
+function onRunnerPassing(team) {
+    if (team == "Other") {
+        runners_past++;
+        // Update displays
+        updateMinimumScores();
+        updateRunnersPastDisplay();
+        return;
+    }
+    let place = ++runners_past;
+    SHC_runners_places.push(place);
+    if (SHC_runners_places.length <= 5) SHC_score += place;
+    // Update displays
+    SHC_team_place_display.textContent = "SHC (" + SHC_score + "): ";
+    SHC_athelete_place_display.textContent = SHC_runners_places.join(",");
+    updateMinimumScores("SHC");
+    updateRunnersPastDisplay();
+    updateFooterColor();
 }
 
 // UTILITY FUNCTIONS
@@ -81,4 +102,11 @@ function updateFooterColor() {
     if (SHC_score < SI_score) footer.style.backgroundColor = "rgba(0, 87, 61, 1)";
     else footer.style.backgroundColor = "rgba(167, 25, 48, 1)";
     footer.style.color = "white";
+}
+
+window.onload = () => {
+    let teams_input = prompt("Enter the teams in this race, separated by commas:", "SHC,SI");
+    teams_input.split(",").forEach((team) => {
+
+    });
 }
