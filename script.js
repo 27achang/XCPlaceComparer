@@ -7,6 +7,7 @@ const runners_past_display = document.getElementById("runners_past_display");
 
 var runners_past = 0;
 var teams = {};
+const keys = ["KeyA", "KeyS", "KeyD", "KeyF", "KeyG", "KeyH", "KeyJ", "KeyK", "KeyL"];
 
 // ON CLICK ACTIONS
 
@@ -79,17 +80,33 @@ function updateFooterColor() {
     }
 }
 
+function onKeyPress(e) {
+    // Check if the space bar was pressed and trigger an "Other" button press
+    if (e.code == "Space") {
+        onRunnerPassing("Other");
+        return;
+    }
+
+    // Check that the key is from the home row (A to L) and is not out of the range of the number of teams (eg. pressing F will do nothing if there are only 3 teams)
+    if (!(keys.includes(e.code)) || keys.indexOf(e.code) + 1 > Object.keys(teams).length) return;
+    // Make sure the team does not already have 7 runners and that the button is not already disabled
+    if (Object.values(teams)[keys.indexOf(e.code)].runners_places.length >= 7 || button_container.querySelector("." + Object.keys(teams)[keys.indexOf(e.code)]).hasAttribute("disabled")) return;
+    onRunnerPassing(Object.keys(teams)[keys.indexOf(e.code)]);
+}
+
 window.onload = () => {
     let teams_input;
     do teams_input = prompt("Enter the teams in this race, separated by commas:\n (The following teams will receive special coloring for the buttons: SHC, SI, SFHS, BCP)", "SHC,SI,SFHS");
     while (teams_input.length == 0);
     if (teams_input == null) return;
+
     let buttons = button_container.querySelectorAll("button");
     buttons.item(0).remove();
     buttons.item(1).remove();
     let footers = footer.querySelectorAll("div");
     footers.item(0).remove();
     footers.item(1).remove();
+
     teams_input.split(",").forEach((team) => {
         teams[team] = {
             score: 0,
@@ -114,5 +131,8 @@ window.onload = () => {
         let display = document.createElement("span");
         container.appendChild(display);
         footer.insertBefore(container, runners_past_footer);
+
     });
+    // Add an event listener for the button
+    document.addEventListener("keydown", onKeyPress)
 }
