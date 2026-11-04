@@ -32,6 +32,19 @@ function onRunnerPassing(team) {
     if (teams[team].runners_places.length >= 7) button_container.querySelector("button." + team).setAttribute("disabled", "true");
 }
 
+async function copyScores() {
+    let scores_text = Object.keys(teams).reduce((result, team) => {
+        let spans = footer.querySelector("." + team).querySelectorAll("span");
+        return result + spans.item(0).textContent + spans.item(1).textContent + String.fromCharCode(10);
+    }, "");
+    try {
+        await navigator.clipboard.writeText(scores_text);
+    } catch (error) {
+        console.error(error.message);
+        alert(error.message);
+    }
+}
+
 // UTILITY FUNCTIONS
 
 function updateMinimumScores(last_runner) {

@@ -62,6 +62,7 @@ button:disabled {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    cursor: pointer;
 }
 
 #footer div {
