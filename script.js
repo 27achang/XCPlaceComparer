@@ -1,55 +1,14 @@
 const button_container = document.getElementById("buttons_div");
 const other_runner_button = document.getElementById("other_runner_button");
 const footer = document.getElementById("footer");
-const SHC_team_place_display = document.getElementById("SHC_team_place_display");
-const SHC_athelete_place_display = document.getElementById("SHC_athelete_place_display");
-const SI_team_place_display = document.getElementById("SI_team_place_display");
-const SI_athelete_place_display = document.getElementById("SI_athelete_place_display");
 const runners_past_footer = document.getElementById("runners_past_footer");
 const runners_past_label = document.getElementById("runners_past_label");
 const runners_past_display = document.getElementById("runners_past_display");
 
 var runners_past = 0;
 var teams = {};
-var SHC_score = 0;
-var SHC_minimum_score = 0;
-var SHC_runners_places = [];
-var SI_score = 0;
-var SI_minimum_score = 0;
-var SI_runners_places = [];
 
 // ON CLICK ACTIONS
-
-function onSHCRunnerPassing() {
-    let place = ++runners_past;
-    SHC_runners_places.push(place);
-    if (SHC_runners_places.length <= 5) SHC_score += place;
-    // Update displays
-    SHC_team_place_display.textContent = "SHC (" + SHC_score + "): ";
-    SHC_athelete_place_display.textContent = SHC_runners_places.join(",");
-    updateMinimumScores("SHC");
-    updateRunnersPastDisplay();
-    updateFooterColor();
-}
-
-function onSIRunnerPassing() {
-    let place = ++runners_past;
-    SI_runners_places.push(place);
-    if (SI_runners_places.length <= 5) SI_score += place;
-    // Update displays
-    SI_team_place_display.textContent = "SI (" + SI_score + "): ";
-    SI_athelete_place_display.textContent = SI_runners_places.join(",");
-    updateMinimumScores("SI");
-    updateRunnersPastDisplay();
-    updateFooterColor();
-}
-
-function onOtherRunnerPassing() {
-    runners_past++;
-    // Update displays
-    updateMinimumScores();
-    updateRunnersPastDisplay();
-}
 
 function onRunnerPassing(team) {
     if (team == "Other") {
@@ -113,10 +72,31 @@ function updateRunnersPastDisplay() {
 }
 
 function updateFooterColor() {
-    if (SHC_score == 0 || SI_score == 0) return;
-    if (SHC_score < SI_score) footer.style.backgroundColor = "rgba(0, 87, 61, 1)";
-    else footer.style.backgroundColor = "rgba(167, 25, 48, 1)";
-    footer.style.color = "white";
+    let winning_team = ["", 0];
+    Object.keys(teams).forEach((team) => {
+        if (teams[team].minimum_score != 0 && (winning_team[1] == 0 || teams[team].minimum_score < winning_team[1])) winning_team = [team, teams[team].minimum_score];
+    });
+    switch (winning_team[0]) {
+        case "SHC":
+            footer.style.backgroundColor = "rgba(0, 87, 61, 1)";
+            footer.style.color = "white";
+            break;
+        case "SI":
+            footer.style.backgroundColor = "rgba(167, 25, 48, 1)";
+            footer.style.color = "white";
+            break;
+        case "SFHS":
+            footer.style.backgroundColor = "rgba(94, 82, 67, 1)";
+            footer.style.color = "white";
+            break;
+        case "BCP":
+            footer.style.backgroundColor = "rgba(0, 47, 108, 1)";
+            footer.style.color = "white";
+            break;
+        default:
+            footer.style.backgroundColor = "transparent";
+            footer.style.color = "black";
+    }
 }
 
 window.onload = () => {
