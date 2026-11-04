@@ -8,20 +8,20 @@
 </head>
 <body>
     <div id="buttons_div">
-        <button id="SHC_runner_button" onclick="onSHCRunnerPassing()">SHC</button>
-        <button id="SI_runner_button" onclick="onSIRunnerPassing()">SI</button>
+        <button class="SHC" onclick="onRunnerPassing('SHC')">SHC</button>
+        <button class="SI" onclick="onRunnerPassing('SI')">SI</button>
         <button id="other_runner_button" onclick="onOtherRunnerPassing()">Other</button>
     </div>
     <div id="footer">
-        <div>
-            <span id="SHC_team_place_display" class="label">SHC</span>
-            <span id="SHC_athelete_place_display"></span>
+        <div class="SHC">
+            <span class="label">SHC</span>
+            <span></span>
         </div>
         <div>
-            <span id="SI_team_place_display" class="label">SI</span>
-            <span id="SI_athelete_place_display"></span>
+            <span class="label">SI</span>
+            <span></span>
         </div>
-        <div>
+        <div id="runners_past_footer">
             <span id="runners_past_label" class="label">Runners Past</span>
             <span id="runners_past_display"></span>
         </div>

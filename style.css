@@ -18,20 +18,37 @@ body {
     font-size: 3em;
     font-weight: bold;
     cursor: pointer;
+    margin: 0px 5px;
 }
 
-#SHC_runner_button {
+button.SHC {
     background-color: #00573D;
     color: white;
-    margin-right: 5px;
     border: 2px solid #6BA53A;
 }
 
-#SI_runner_button {
+button.SI {
     background-color: #A71930;
     color: white;
-    margin-right: 5px;
     border: 2px solid #002664;
+}
+
+button.SFHS {
+    background-color: #5E5243;
+    color: white;
+    border: 2px solid #BC8340;
+}
+
+button.BCP {
+    background-color: #002F6C;
+    color: white;
+    border: 2px solid #005596;
+}
+
+button:disabled {
+    background-color: lightgray;
+    color: gray;
+    cursor: default !important;
 }
 
 #other_runner_button {
