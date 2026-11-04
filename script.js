@@ -44,26 +44,6 @@ function updateMinimumScores(last_runner) {
         display.textContent += `≥${teams[team].minimum_score})`;
         if (teams[team].runners_places.length > 0) display.textContent += ": ";
     });
-    // if (SHC_runners_places.length < 5) {
-    //     // If the most recent update/runner past was an SHC runner, it is irrelevant to update the minimum score.
-    //     if (last_runner == "SHC") {
-    //         SHC_team_place_display.textContent = "SHC (" + SHC_score + (SHC_runners_places.length > 0 ? "): " : ")");
-    //     }
-    //     // The minimum score is the current score plus the place of the next runner (best case scenario that the next runner is from SHC)
-    //     else {
-    //         SHC_minimum_score = SHC_score + (runners_past + 1);
-    //         // Update the display. If no SHC runners have passed, don't add the colon and space after the closing parentheses.
-    //         SHC_team_place_display.textContent = "SHC (≥" + SHC_minimum_score + (SHC_runners_places.length > 0 ? "): " : ")");
-    //     }
-    // }
-    // if (SI_runners_places.length < 5) {
-    //     if (last_runner == "SI") {
-    //         SI_team_place_display.textContent = "SI (" + SI_score + (SI_runners_places.length > 0 ? "): " : ")");
-    //     } else {
-    //         SI_minimum_score = SI_score + (runners_past + 1);
-    //         SI_team_place_display.textContent = "SI (≥" + SI_minimum_score + (SI_runners_places.length > 0 ? "): " : ")");
-    //     }
-    // }
 }
 
 function updateRunnersPastDisplay() {
