@@ -109,7 +109,13 @@ function onKeyPress(e) {
 
 window.onload = () => {
     let teams_input;
-    do teams_input = prompt("Enter the teams in this race, separated by commas:\n (The following teams will receive special coloring for the buttons: SHC, SI, SFHS, BCP)", "SHC,SI,SFHS");
+    do teams_input = prompt(
+        `Enter the teams in this race, separated by commas:
+Top Boys Teams: San Mateo, SI, SHC, Willow Glen, Hillsdale
+Top Girls Teams: SI, SHC, Burlingame, San Mateo
+(The following teams will receive special coloring for the buttons: SHC, SI, SFHS, BCP)`,
+        "SHC,SI,SFHS"
+    );
     while (teams_input.length == 0);
     if (teams_input == null) return;
 
